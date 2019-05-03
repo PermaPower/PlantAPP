@@ -60,17 +60,49 @@
 		2282041E227BE556004840FD /* PlantApp */ = {
 			isa = PBXGroup;
 			children = (
+				22820439227C045D004840FD /* Model */,
+				2282043B227C0493004840FD /* View */,
+				2282043A227C047E004840FD /* Controller */,
+				2282043C227C04C3004840FD /* Extensions */,
 				2282041F227BE556004840FD /* AppDelegate.swift */,
-				22820431227BECF9004840FD /* CustomNavigationController.swift */,
-				22820421227BE556004840FD /* PlantController.swift */,
-				22820437227BFFE0004840FD /* CreatePlantController.swift */,
-				22820435227BFE4C004840FD /* Plant.swift */,
-				22820433227BF44A004840FD /* ColorPalette.swift */,
 				22820426227BE557004840FD /* Assets.xcassets */,
 				22820428227BE557004840FD /* LaunchScreen.storyboard */,
 				2282042B227BE557004840FD /* Info.plist */,
 			);
 			path = PlantApp;
+			sourceTree = "<group>";
+		};
+		22820439227C045D004840FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22820435227BFE4C004840FD /* Plant.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2282043A227C047E004840FD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22820421227BE556004840FD /* PlantController.swift */,
+				22820437227BFFE0004840FD /* CreatePlantController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2282043B227C0493004840FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22820431227BECF9004840FD /* CustomNavigationController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2282043C227C04C3004840FD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				22820433227BF44A004840FD /* ColorPalette.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
