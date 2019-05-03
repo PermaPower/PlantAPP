@@ -19,9 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let plantVC=ViewController()
+        let plantVC=PlantController()
         let navController = CustomNavigationController(rootViewController: plantVC)
         window?.rootViewController = navController
+        
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().barTintColor = .cRedish
+        UINavigationBar.appearance().tintColor = .cWhite
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.cWhite]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.cWhite]
         
         return true
     }

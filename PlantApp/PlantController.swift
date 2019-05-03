@@ -8,9 +8,15 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class PlantController: UITableViewController {
     
     let cellId = "CellID"
+    
+    let plants = [
+        Plant(name: "Plant A", date: Date()),
+        Plant(name: "Plant B", date: Date()),
+        Plant(name: "Plant C", date: Date())
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,22 +25,9 @@ class ViewController: UITableViewController {
         
         navigationItem.title = "Plants"
         
-        setupNavigationStyle()
-        
         setupNavigationButtons()
         
         setupTableView()
-  
-    }
-    
-    func setupNavigationStyle() {
-
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = .cRedish
-        navigationController?.navigationBar.tintColor = .cWhite
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.cWhite]
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.cWhite]
     }
     
     func setupNavigationButtons() {
@@ -58,7 +51,8 @@ class ViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
-        cell.textLabel?.text = "Plant Name"
+        let plant = plants[indexPath.row]
+        cell.textLabel?.text = plant.name
         
         cell.textLabel?.textColor = .cWhite
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -79,11 +73,16 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return plants.count
     }
     
     @objc func handleAddPlantsButton() {
         print ("Add button pressed")
+        
+        let createCompanyController = CreatePlantController()
+        let navController = CustomNavigationController(rootViewController: createCompanyController)
+
+        present(navController, animated: true, completion: nil)
     }
   
 }

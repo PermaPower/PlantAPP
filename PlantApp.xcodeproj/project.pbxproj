@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		22820420227BE556004840FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2282041F227BE556004840FD /* AppDelegate.swift */; };
-		22820422227BE556004840FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820421227BE556004840FD /* ViewController.swift */; };
+		22820422227BE556004840FD /* PlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820421227BE556004840FD /* PlantController.swift */; };
 		22820427227BE557004840FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22820426227BE557004840FD /* Assets.xcassets */; };
 		2282042A227BE557004840FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22820428227BE557004840FD /* LaunchScreen.storyboard */; };
 		22820432227BECF9004840FD /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820431227BECF9004840FD /* CustomNavigationController.swift */; };
 		22820434227BF44A004840FD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820433227BF44A004840FD /* ColorPalette.swift */; };
+		22820436227BFE4C004840FD /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820435227BFE4C004840FD /* Plant.swift */; };
+		22820438227BFFE0004840FD /* CreatePlantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22820437227BFFE0004840FD /* CreatePlantController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2282041C227BE556004840FD /* PlantApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2282041F227BE556004840FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22820421227BE556004840FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22820421227BE556004840FD /* PlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantController.swift; sourceTree = "<group>"; };
 		22820426227BE557004840FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22820429227BE557004840FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2282042B227BE557004840FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22820431227BECF9004840FD /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		22820433227BF44A004840FD /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		22820435227BFE4C004840FD /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		22820437227BFFE0004840FD /* CreatePlantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlantController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				2282041F227BE556004840FD /* AppDelegate.swift */,
 				22820431227BECF9004840FD /* CustomNavigationController.swift */,
-				22820421227BE556004840FD /* ViewController.swift */,
+				22820421227BE556004840FD /* PlantController.swift */,
+				22820437227BFFE0004840FD /* CreatePlantController.swift */,
+				22820435227BFE4C004840FD /* Plant.swift */,
 				22820433227BF44A004840FD /* ColorPalette.swift */,
 				22820426227BE557004840FD /* Assets.xcassets */,
 				22820428227BE557004840FD /* LaunchScreen.storyboard */,
@@ -138,9 +144,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22820432227BECF9004840FD /* CustomNavigationController.swift in Sources */,
-				22820422227BE556004840FD /* ViewController.swift in Sources */,
+				22820422227BE556004840FD /* PlantController.swift in Sources */,
+				22820436227BFE4C004840FD /* Plant.swift in Sources */,
 				22820420227BE556004840FD /* AppDelegate.swift in Sources */,
 				22820434227BF44A004840FD /* ColorPalette.swift in Sources */,
+				22820438227BFFE0004840FD /* CreatePlantController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
