@@ -24,15 +24,13 @@ class ViewController: UIViewController {
     }
     
     func setupNavigationStyle() {
-        
-        let navigationBarColor = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
-        
+
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = navigationBarColor
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barTintColor = .navigationBarColor
+        navigationController?.navigationBar.tintColor = .navigationBarTextColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.navigationBarTextColor]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.navigationBarTextColor]
     }
     
     func setupNavigationButtons() {
