@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol CreatePlantControllerDelegate {
+    func didAddPlant(plant: Plant)
+}
+
 class CreatePlantController: UIViewController {
     
     // Link the controllers
-    var plantsController: PlantController?
+    var delegate: CreatePlantControllerDelegate?
     
     let backgroundColorForView: UIView = {
         let view = UIView()
@@ -92,7 +96,7 @@ class CreatePlantController: UIViewController {
             
             let newPlant = Plant(name: plantName, date: Date())
         
-            self.plantsController?.addPlant(newPlantDetails: newPlant)
+            self.delegate?.didAddPlant(plant: newPlant)
         }
         
     }

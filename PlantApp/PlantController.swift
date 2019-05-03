@@ -8,8 +8,17 @@
 
 import UIKit
 
-class PlantController: UITableViewController {
+class PlantController: UITableViewController, CreatePlantControllerDelegate {
     
+    func didAddPlant(plant: Plant) {
+        plants.append(plant)
+        
+        // Insert a new indexPath into tableView
+        let newIndexPathPostion = IndexPath(row: plants.count - 1, section: 0)
+        
+        tableView.insertRows(at: [newIndexPathPostion], with: .automatic)
+    }
+
     let cellId = "CellID"
     
     var plants = [
@@ -83,19 +92,9 @@ class PlantController: UITableViewController {
         let navController = CustomNavigationController(rootViewController: createPlantController)
         
         // Create link property between controllers
-        createPlantController.plantsController = self
+        createPlantController.delegate = self
 
         present(navController, animated: true, completion: nil)
-    }
-    
-    func addPlant(newPlantDetails: Plant) {
-        
-        plants.append(newPlantDetails)
-        
-        // Insert a new indexPath into tableView
-        let newIndexPathPostion = IndexPath(row: plants.count - 1, section: 0)
-        
-        tableView.insertRows(at: [newIndexPathPostion], with: .automatic)
     }
   
 }
