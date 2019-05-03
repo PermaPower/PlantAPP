@@ -12,7 +12,7 @@ class PlantController: UITableViewController {
     
     let cellId = "CellID"
     
-    let plants = [
+    var plants = [
         Plant(name: "Plant A", date: Date()),
         Plant(name: "Plant B", date: Date()),
         Plant(name: "Plant C", date: Date())
@@ -30,11 +30,11 @@ class PlantController: UITableViewController {
         setupTableView()
     }
     
-    func setupNavigationButtons() {
+    private func setupNavigationButtons() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddPlantsButton))
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         
         // tableView.separatorStyle = .none
         tableView.separatorColor = .cWhite
@@ -79,10 +79,23 @@ class PlantController: UITableViewController {
     @objc func handleAddPlantsButton() {
         print ("Add button pressed")
         
-        let createCompanyController = CreatePlantController()
-        let navController = CustomNavigationController(rootViewController: createCompanyController)
+        let createPlantController = CreatePlantController()
+        let navController = CustomNavigationController(rootViewController: createPlantController)
+        
+        // Create link property between controllers
+        createPlantController.plantsController = self
 
         present(navController, animated: true, completion: nil)
+    }
+    
+    func addPlant(newPlantDetails: Plant) {
+        
+        plants.append(newPlantDetails)
+        
+        // Insert a new indexPath into tableView
+        let newIndexPathPostion = IndexPath(row: plants.count - 1, section: 0)
+        
+        tableView.insertRows(at: [newIndexPathPostion], with: .automatic)
     }
   
 }
