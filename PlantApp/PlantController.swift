@@ -10,8 +10,8 @@ import UIKit
 
 class PlantController: UITableViewController, CreatePlantControllerDelegate {
     
-    func didAddPlant(plant: Plant) {
-        plants.append(plant)
+    func didAddPlant(plantDeleagate: Plant) {
+        plants.append(plantDeleagate)
         
         // Insert a new indexPath into tableView
         let newIndexPathPostion = IndexPath(row: plants.count - 1, section: 0)
@@ -86,12 +86,11 @@ class PlantController: UITableViewController, CreatePlantControllerDelegate {
     }
     
     @objc func handleAddPlantsButton() {
-        print ("Add button pressed")
         
         let createPlantController = CreatePlantController()
         let navController = CustomNavigationController(rootViewController: createPlantController)
         
-        // Create link property between controllers
+        // Create link property between controllers pointing to the initialised createPlantController (see above)
         createPlantController.delegate = self
 
         present(navController, animated: true, completion: nil)
