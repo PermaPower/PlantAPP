@@ -54,6 +54,44 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         return label
     }()
     
+    let activityMonthTextField: UILabel = {
+        let textField = UILabel()
+        textField.text = "Activity"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let activityMonthStackView: UIView = {
+        
+        let stackView = UIStackView(arrangedSubviews: [])
+        
+        (0..<12).forEach{index in
+            
+            let v = UIButton()
+            v.tag = index
+            v.backgroundColor = .gray
+            v.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            stackView.addArrangedSubview(v)
+        }
+        
+        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    @objc func buttonTapped(sender: UIButton) {
+        print (sender.tag)
+        
+    }
+    
+    
     override func viewDidLoad() {
         
         view.backgroundColor = .cdarkBlue
@@ -83,6 +121,8 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         view.addSubview(nameTextField)
         view.addSubview(pickerLabel)
         view.addSubview(plantPicker)
+        view.addSubview(activityMonthTextField)
+        view.addSubview(activityMonthStackView)
         
         backgroundColorForView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundColorForView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -106,16 +146,25 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         plantPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
         plantPicker.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         plantPicker.leftAnchor.constraint(equalTo: pickerLabel.rightAnchor).isActive = true
-        plantPicker.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        plantPicker.bottomAnchor.constraint(equalTo: pickerLabel.bottomAnchor).isActive = true
         
+        activityMonthTextField.topAnchor.constraint(equalTo: plantPicker.bottomAnchor).isActive = true
+        activityMonthTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        activityMonthTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        activityMonthTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.bottomAnchor).isActive = true
+        activityMonthStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.rightAnchor).isActive = true
+        activityMonthStackView.bottomAnchor.constraint(equalTo: activityMonthTextField.bottomAnchor).isActive = true
+
        
-        backgroundColorForView.bottomAnchor.constraint(equalTo: plantPicker.bottomAnchor).isActive = true
+        backgroundColorForView.bottomAnchor.constraint(equalTo: activityMonthStackView.bottomAnchor).isActive = true
         
         
     }
     
     @objc func handleCancelPlantsCreateButton(){
-        print("Cancel button pressed")
         
         dismiss(animated: true, completion: nil)
     }
@@ -152,10 +201,12 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 let pLabel = UILabel()
                 pLabel.textAlignment = .left
                 pLabel.text = plantType[row]
-                pLabel.textColor = .cTeal
+                pLabel.textColor = .lightGray
                 return pLabel
         }()
         
         return pLabel
     }
+    
+  
 }
