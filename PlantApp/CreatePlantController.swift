@@ -11,6 +11,9 @@ import UIKit
 // Properties
 let plantType = ["Tree", "Seed", "Seedling"]
 
+// Activity months
+let activityMonths = ["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"]
+
 protocol CreatePlantControllerDelegate {
     func didAddPlant(plantDeleagate: Plant)
 }
@@ -87,7 +90,8 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }()
     
     @objc func buttonTapped(sender: UIButton) {
-        print (sender.tag)
+        //print (sender.tag)
+        print (activityMonths[sender.tag])
         
     }
     
