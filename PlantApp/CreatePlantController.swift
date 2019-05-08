@@ -62,7 +62,8 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     let activityMonthTextField: UILabel = {
         let textField = UILabel()
-        textField.text = "Activity"
+        textField.text = "Activity Month"
+        textField.numberOfLines = 2
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -70,7 +71,6 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let activityMonthStackView: UIView = {
  
        let stackView = UIStackView()
-
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
@@ -79,8 +79,9 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
        return stackView
     }()
     
-    @objc func buttonTapped(sender: UIButton) {
+    @objc func buttonTapped(sender: CustomCalendarButton) {
         print (activityMonths[sender.tag])
+        sender.shake()
     }
     
     override func viewDidLoad() {
@@ -97,7 +98,24 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         setupUI()
     }
     
-    func createGrid(x: Int, y: Int, rootView: UIView) {
+    private func fitParentLayout(_ child: UIView, parentView: UIView) {
+        child.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            parentView.leadingAnchor.constraint(equalTo: child.leadingAnchor),
+            parentView.trailingAnchor.constraint(equalTo: child.trailingAnchor),
+            parentView.topAnchor.constraint(equalTo: child.topAnchor),
+            parentView.heightAnchor.constraint(equalTo: child.heightAnchor)])
+    }
+    
+    private func setupNavigationButtons(){
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelPlantsCreateButton))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSavePlantsCreateButton))
+        
+    }
+    
+    private func createGrid(x: Int, y: Int, rootView: UIView) {
         
         //Init stack view.
         let stackView = UIStackView()
@@ -115,13 +133,14 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
             
             
             for _ in 1...y {
-                let button = UIButton()
+                let button = CustomCalendarButton()
                 button.tag = buttonNumber
-                button.backgroundColor = .red
+                button.contentMode = .scaleAspectFit
                 button.setTitle(activityMonths[buttonNumber], for: .normal)
                 button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
                 buttonNumber = buttonNumber + 1
-                button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+                button.setTitleColor(.lightGray, for: .normal)
+                button.setTitleColor(.darkGray, for: .selected)
                 button.titleLabel?.adjustsFontSizeToFitWidth = true
                 button.titleLabel?.numberOfLines = 1
                 button.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
@@ -138,30 +157,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         fitParentLayout(stackView, parentView: rootView)
     }
     
-    
-    func fitParentLayout(_ child: UIView, parentView: UIView) {
-        child.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            parentView.leadingAnchor.constraint(equalTo: child.leadingAnchor),
-            parentView.trailingAnchor.constraint(equalTo: child.trailingAnchor),
-            parentView.topAnchor.constraint(equalTo: child.topAnchor),
-            parentView.heightAnchor.constraint(equalTo: child.heightAnchor)])
-    }
-    
-    private func setupNavigationButtons(){
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelPlantsCreateButton))
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSavePlantsCreateButton))
-        
-    }
-    
     private func setupUI(){
-        
-//        view.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        view.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//        view.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
-//        view.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
         view.addSubview(backgroundColorForView)
         view.addSubview(nameLabel)
@@ -255,6 +251,5 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         return pLabel
     }
-    
   
 }
