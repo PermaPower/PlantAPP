@@ -12,7 +12,7 @@ import UIKit
 let plantType = ["Tree", "Seed", "Seedling"]
 
 // Activity months
-let activityMonths = ["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"]
+let activityMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
 protocol CreatePlantControllerDelegate {
     func didAddPlant(plantDeleagate: Plant)
@@ -72,7 +72,10 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
             
             let v = UIButton()
             v.tag = index
-            v.backgroundColor = .gray
+            //v.backgroundColor = .gray
+            //v.setBackgroundImage(#imageLiteral(resourceName: "Calendar Icon"), for: .normal)
+            v.setTitle(activityMonths[index], for: .normal)
+            v.setTitleColor(.lightGray, for: .normal)
             v.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
             stackView.addArrangedSubview(v)
         }
@@ -119,6 +122,11 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     private func setupUI(){
+        
+        view.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        view.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
         view.addSubview(backgroundColorForView)
         view.addSubview(nameLabel)
