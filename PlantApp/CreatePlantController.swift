@@ -69,12 +69,11 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     let activityMonthStackView: UIView = {
  
-       let stackView = UIStackView(arrangedSubviews: [])
+       let stackView = UIStackView()
 
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
-        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
        return stackView
