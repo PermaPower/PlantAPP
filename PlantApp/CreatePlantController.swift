@@ -14,6 +14,9 @@ let plantType = ["Tree", "Seed", "Seedling"]
 // Activity months
 let activityMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
+// Reset Button Number
+var buttonNumber = 0
+
 protocol CreatePlantControllerDelegate {
     func didAddPlant(plantDeleagate: Plant)
 }
@@ -65,39 +68,21 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }()
     
     let activityMonthStackView: UIView = {
-        
-        let stackView = UIStackView(arrangedSubviews: [])
-        
-        (0..<12).forEach{index in
-            
-            let v = UIButton()
-            v.tag = index
-            //v.backgroundColor = .gray
-            //v.setBackgroundImage(#imageLiteral(resourceName: "Calendar Icon"), for: .normal)
-            v.setTitle(activityMonths[index], for: .normal)
-            v.setTitleColor(.lightGray, for: .normal)
-            v.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-            stackView.addArrangedSubview(v)
-        }
-        
-        stackView.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        
+ 
+       let stackView = UIStackView(arrangedSubviews: [])
+
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
+
+       return stackView
     }()
     
     @objc func buttonTapped(sender: UIButton) {
-        //print (sender.tag)
         print (activityMonths[sender.tag])
-        
     }
-    
     
     override func viewDidLoad() {
         
@@ -113,6 +98,57 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         setupUI()
     }
     
+    func createGrid(x: Int, y: Int, rootView: UIView) {
+        
+        //Init stack view.
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        
+        for _ in 1...x {
+            let hStackView = UIStackView()
+            hStackView.axis = .horizontal
+            hStackView.alignment = .fill
+            hStackView.distribution = .fillEqually
+            hStackView.spacing = 10
+            
+            
+            for _ in 1...y {
+                let button = UIButton()
+                button.tag = buttonNumber
+                button.backgroundColor = .red
+                button.setTitle(activityMonths[buttonNumber], for: .normal)
+                button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+                buttonNumber = buttonNumber + 1
+                button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+                button.titleLabel?.adjustsFontSizeToFitWidth = true
+                button.titleLabel?.numberOfLines = 1
+                button.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+                hStackView.addArrangedSubview(button)
+            }
+            
+            //Add horizontal row stack to vertical parent stack.
+            stackView.addArrangedSubview(hStackView)
+        }
+        
+        rootView.addSubview(stackView)
+        
+        //setup stack view bounds
+        fitParentLayout(stackView, parentView: rootView)
+    }
+    
+    
+    func fitParentLayout(_ child: UIView, parentView: UIView) {
+        child.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            parentView.leadingAnchor.constraint(equalTo: child.leadingAnchor),
+            parentView.trailingAnchor.constraint(equalTo: child.trailingAnchor),
+            parentView.topAnchor.constraint(equalTo: child.topAnchor),
+            parentView.heightAnchor.constraint(equalTo: child.heightAnchor)])
+    }
+    
     private func setupNavigationButtons(){
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancelPlantsCreateButton))
@@ -123,10 +159,10 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     private func setupUI(){
         
-        view.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        view.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        view.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
+//        view.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        view.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//        view.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
+//        view.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
         view.addSubview(backgroundColorForView)
         view.addSubview(nameLabel)
@@ -140,36 +176,37 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         backgroundColorForView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         backgroundColorForView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        nameTextField.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        nameTextField.leftAnchor.constraint(equalTo: nameLabel.rightAnchor).isActive = true
-        nameTextField.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        nameTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        nameTextField.leftAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.rightAnchor).isActive = true
+        nameTextField.bottomAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        pickerLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
-        pickerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        pickerLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        pickerLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         pickerLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         pickerLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        plantPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor).isActive = true
-        plantPicker.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        plantPicker.leftAnchor.constraint(equalTo: pickerLabel.rightAnchor).isActive = true
-        plantPicker.bottomAnchor.constraint(equalTo: pickerLabel.bottomAnchor).isActive = true
+        plantPicker.topAnchor.constraint(equalTo: nameTextField.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        plantPicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        plantPicker.leftAnchor.constraint(equalTo: pickerLabel.safeAreaLayoutGuide.rightAnchor).isActive = true
+        plantPicker.bottomAnchor.constraint(equalTo: pickerLabel.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        activityMonthTextField.topAnchor.constraint(equalTo: plantPicker.bottomAnchor).isActive = true
-        activityMonthTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        activityMonthTextField.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        activityMonthTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         activityMonthTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         activityMonthTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.bottomAnchor).isActive = true
-        activityMonthStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.rightAnchor).isActive = true
-        activityMonthStackView.bottomAnchor.constraint(equalTo: activityMonthTextField.bottomAnchor).isActive = true
-
+        activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        activityMonthStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.safeAreaLayoutGuide.rightAnchor).isActive = true
+        activityMonthStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        createGrid(x: 2, y: 6, rootView: activityMonthStackView)
        
         backgroundColorForView.bottomAnchor.constraint(equalTo: activityMonthStackView.bottomAnchor).isActive = true
         
