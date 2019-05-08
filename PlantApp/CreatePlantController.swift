@@ -137,10 +137,10 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 button.tag = buttonNumber
                 button.contentMode = .scaleAspectFit
                 button.setTitle(activityMonths[buttonNumber], for: .normal)
+                button.titleEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
                 button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
                 buttonNumber = buttonNumber + 1
-                button.setTitleColor(.lightGray, for: .normal)
-                button.setTitleColor(.darkGray, for: .selected)
+                button.setTitleColor(.cWhite, for: .normal)
                 button.titleLabel?.adjustsFontSizeToFitWidth = true
                 button.titleLabel?.numberOfLines = 1
                 button.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
@@ -201,7 +201,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.safeAreaLayoutGuide.rightAnchor).isActive = true
         activityMonthStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
-        createGrid(x: 2, y: 6, rootView: activityMonthStackView)
+        createGrid(x: 4, y: 3, rootView: activityMonthStackView)
        
         backgroundColorForView.bottomAnchor.constraint(equalTo: activityMonthStackView.bottomAnchor).isActive = true
         

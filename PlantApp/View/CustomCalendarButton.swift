@@ -26,18 +26,18 @@ class CustomCalendarButton: UIButton {
         setShadow()
         setTitleColor(.white, for: .normal)
         
-        backgroundColor      = .blue
+        backgroundColor      = .darkGray
         //titleLabel?.font     = UIFont(name: "AvenirNext-DemiBold", size: 18)
-        layer.cornerRadius   = 25
-        layer.borderWidth    = 3.0
-        layer.borderColor    = UIColor.darkGray.cgColor
+        layer.cornerRadius   = 8
+        layer.borderWidth    = 1
+        layer.borderColor    = UIColor.lightGray.cgColor
     }
     
     
     private func setShadow() {
         layer.shadowColor   = UIColor.black.cgColor
         layer.shadowOffset  = CGSize(width: 0.0, height: 6.0)
-        layer.shadowRadius  = 8
+        layer.shadowRadius  = 3
         layer.shadowOpacity = 0.5
         clipsToBounds       = true
         layer.masksToBounds = false
