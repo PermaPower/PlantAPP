@@ -181,7 +181,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         pickerLabel.topAnchor.constraint(equalTo: nameLabel.safeAreaLayoutGuide.bottomAnchor).isActive = true
         pickerLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         pickerLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        pickerLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        pickerLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         plantPicker.topAnchor.constraint(equalTo: nameTextField.safeAreaLayoutGuide.bottomAnchor).isActive = true
         plantPicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
