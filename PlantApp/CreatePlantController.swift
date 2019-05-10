@@ -188,20 +188,19 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         plantPicker.leftAnchor.constraint(equalTo: pickerLabel.safeAreaLayoutGuide.rightAnchor).isActive = true
         plantPicker.bottomAnchor.constraint(equalTo: pickerLabel.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        activityMonthTextField.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        activityMonthTextField.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
         activityMonthTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
         activityMonthTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         activityMonthTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
         activityMonthStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.safeAreaLayoutGuide.rightAnchor).isActive = true
         activityMonthStackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         createGrid(x: 4, y: 3, rootView: activityMonthStackView)
        
-        backgroundColorForView.bottomAnchor.constraint(equalTo: activityMonthStackView.bottomAnchor).isActive = true
-        
+        backgroundColorForView.bottomAnchor.constraint(equalTo: activityMonthStackView.bottomAnchor, constant: 20).isActive = true
         
     }
     
