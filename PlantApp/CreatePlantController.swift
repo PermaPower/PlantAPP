@@ -14,8 +14,8 @@ let plantType = ["Tree", "Seed", "Seedling"]
 // Activity months
 let activityMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
-// Reset Button Number
-var buttonNumber = 0
+// Toggle Button
+var toggleButton = Array(repeating: false, count: 12)
 
 protocol CreatePlantControllerDelegate {
     func didAddPlant(plantDeleagate: Plant)
@@ -79,11 +79,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
        return stackView
     }()
     
-    @objc func buttonTapped(sender: CustomCalendarButton) {
-        print (activityMonths[sender.tag])
-        sender.shake()
-    }
-    
+   
     override func viewDidLoad() {
         
         view.backgroundColor = .cdarkBlue
@@ -124,6 +120,9 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         stackView.distribution = .fillEqually
         stackView.spacing = 10
         
+        // Reset Button Number
+        var buttonNumber = 0
+
         for _ in 1...x {
             let hStackView = UIStackView()
             hStackView.axis = .horizontal
@@ -137,10 +136,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 button.tag = buttonNumber
                 button.contentMode = .scaleAspectFit
                 button.setTitle(activityMonths[buttonNumber], for: .normal)
-                button.titleEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
-                button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
                 buttonNumber = buttonNumber + 1
-                button.setTitleColor(.cWhite, for: .normal)
                 button.titleLabel?.adjustsFontSizeToFitWidth = true
                 button.titleLabel?.numberOfLines = 1
                 button.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
@@ -150,6 +146,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
             //Add horizontal row stack to vertical parent stack.
             stackView.addArrangedSubview(hStackView)
         }
+
         
         rootView.addSubview(stackView)
         
@@ -199,7 +196,7 @@ class CreatePlantController: UIViewController, UIPickerViewDelegate, UIPickerVie
         activityMonthStackView.topAnchor.constraint(equalTo: plantPicker.safeAreaLayoutGuide.bottomAnchor).isActive = true
         activityMonthStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         activityMonthStackView.leftAnchor.constraint(equalTo: activityMonthTextField.safeAreaLayoutGuide.rightAnchor).isActive = true
-        activityMonthStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        activityMonthStackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         createGrid(x: 4, y: 3, rootView: activityMonthStackView)
        

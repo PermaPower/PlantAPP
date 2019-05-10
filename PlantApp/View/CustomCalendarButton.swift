@@ -10,6 +10,8 @@ import UIKit
 
 class CustomCalendarButton: UIButton {
     
+    let CreatePC = CreatePlantController()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
@@ -24,15 +26,29 @@ class CustomCalendarButton: UIButton {
     
     func setupButton() {
         setShadow()
+        
         setTitleColor(.white, for: .normal)
         
-        backgroundColor      = .darkGray
-        //titleLabel?.font     = UIFont(name: "AvenirNext-DemiBold", size: 18)
-        layer.cornerRadius   = 8
+        backgroundColor      = .lightGray
+        layer.cornerRadius   = 18
         layer.borderWidth    = 1
-        layer.borderColor    = UIColor.lightGray.cgColor
+        layer.borderColor    = UIColor.darkGray.cgColor
+        
+        addTarget(self, action: #selector(activateButton), for: .touchUpInside)
+        
     }
     
+    @objc func activateButton(sender: CustomCalendarButton) {
+
+        toggleButton[sender.tag] = !toggleButton[sender.tag]
+    
+        let buttonToChangeColor = sender.viewWithTag(sender.tag) as? UIButton
+        let color = toggleButton[sender.tag] ? UIColor.red : .lightGray
+        buttonToChangeColor?.backgroundColor = color
+    }
+        
+        
+
     
     private func setShadow() {
         layer.shadowColor   = UIColor.black.cgColor
